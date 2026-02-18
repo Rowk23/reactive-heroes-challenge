@@ -1,6 +1,5 @@
 package org.reactive.heroes;
 
-import io.smallrye.common.annotation.Blocking;
 import io.smallrye.mutiny.Multi;
 import io.smallrye.mutiny.Uni;
 import jakarta.ws.rs.*;
@@ -26,11 +25,8 @@ public class SuperheroResource {
     }
 
     @POST
-//    @Blocking
     public Uni<Superhero> create(final Superhero hero) {
         return Uni.createFrom().item(() -> {
-
-//            logThreadInfo();
 
             try {
                 Thread.sleep(3000);
@@ -44,12 +40,4 @@ public class SuperheroResource {
             return hero;
         });
     }
-
-
-//    private void logThreadInfo() {
-//        final Thread thread = Thread.currentThread();
-//        System.out.println("Thread in the service: " + thread.getName()
-//                + " | ID: " + thread.getId()
-//                + " | State: " + thread.getState());
-//    }
 }
