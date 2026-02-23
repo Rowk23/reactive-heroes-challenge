@@ -92,22 +92,8 @@ Fix the performance issue properly.
 
 ---
 
-## (!!!PLEASE IGNORE IT FOR THE MOMENT, I must change something here) Part 2 – Native Image (*Advanced*)
-1. Make sure you have the necessary native build environment set up (GraalVM, Docker/Podman etc.)
-2. Build the application native:
-   hint: ./mvnw clean package -Pnative
-
-3. Run the native executable.
-   hint: executable is located in target/reactive-heroes-challenge-1.0.0-SNAPSHOT-runner.exe
-
-4. Call the POST endpoint again with the same payload as before.
-
-It will fail.
-
-Questions:
-- Why does it fail only in native mode?
-- What is different between JVM and native?
-- How can you fix it?
+## Part 2 – Native Image (*Advanced*)
+1. Switch to the branch `part_two` and follow the instructions from there
 
 ---
 
