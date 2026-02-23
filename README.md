@@ -100,9 +100,7 @@ Fix the performance issue properly.
 3. Run the native executable.
    hint: executable is located in target/reactive-heroes-challenge-1.0.0-SNAPSHOT-runner.exe
 
-4. Call the POST endpoint again with the same payload as before.
-
-It will fail.
+4. Call the POST endpoint and try to create Superheros.
 
 Questions:
 - Why does it fail only in native mode?

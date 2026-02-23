@@ -43,8 +43,16 @@ public class Superhero {
         return name;
     }
 
+    public void setName(final String name) {
+        this.name = name;
+    }
+
     public String getPower() {
         return power;
+    }
+
+    public void setPower(final String power) {
+        this.power = power;
     }
 
     public String getSecretHash() {

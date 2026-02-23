@@ -1,9 +1,9 @@
 package org.reactive.heroes;
 
-import io.smallrye.mutiny.Multi;
-import io.smallrye.mutiny.Uni;
+import io.smallrye.common.annotation.Blocking;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -20,24 +20,28 @@ public class SuperheroResource {
     private final Map<Long, Superhero> store = new ConcurrentHashMap<>();
 
     @GET
-    public Multi<Superhero> getAll() {
-        return Multi.createFrom().iterable(store.values());
+    public Response getAll() {
+        return Response.ok(store.values()).build();
     }
 
     @POST
-    public Uni<Superhero> create(final Superhero hero) {
-        return Uni.createFrom().item(() -> {
-
-            try {
-                Thread.sleep(3000);
-            } catch (final InterruptedException exception) {
-                throw new RuntimeException(exception);
-            }
-
+    @Blocking
+    public Response create(@QueryParam("id") final Long id, @QueryParam("name") final String name,
+                           final @QueryParam("power") String power) {
+        try {
+            final Superhero hero = InstanceCreator.createInstance(Superhero.class);
+            hero.setId(id);
+            hero.setName(name);
+            hero.setPower(power);
             hero.setSecretHash(PowerHasher.hash(hero));
 
             store.put(hero.getId(), hero);
-            return hero;
-        });
+
+            return Response.ok("Created hero: " + hero.getName() + " with power: " + hero.getPower()).build();
+        } catch (Exception exception) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("An error occurred! Please check the implementation to find out the problem!")
+                    .build();
+        }
     }
 }
