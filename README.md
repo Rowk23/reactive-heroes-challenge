@@ -92,7 +92,7 @@ Fix the performance issue properly.
 
 ---
 
-## Part 2 – Native Image (*Advanced*)
+## (!!!PLEASE IGNORE IT FOR THE MOMENT, I must change something here) Part 2 – Native Image (*Advanced*)
 1. Make sure you have the necessary native build environment set up (GraalVM, Docker/Podman etc.)
 2. Build the application native:
    hint: ./mvnw clean package -Pnative
