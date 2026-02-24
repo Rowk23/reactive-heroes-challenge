@@ -1,6 +1,8 @@
 package org.reactive.heroes;
 
 
+import io.quarkus.runtime.annotations.RegisterForReflection;
+
 /**
  * Utility class that uses reflection to create objects.
  */
