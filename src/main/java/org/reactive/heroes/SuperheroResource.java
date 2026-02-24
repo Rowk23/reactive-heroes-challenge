@@ -28,11 +28,11 @@ public class SuperheroResource {
     public Uni<Superhero> create(final Superhero hero) {
         return Uni.createFrom().item(() -> {
 
-            try {
-                Thread.sleep(3000);
-            } catch (final InterruptedException exception) {
-                throw new RuntimeException(exception);
-            }
+//            try {
+//                Thread.sleep(3000);
+//            } catch (final InterruptedException exception) {
+//                throw new RuntimeException(exception);
+//            }
 
             hero.setSecretHash(PowerHasher.hash(hero));
 
