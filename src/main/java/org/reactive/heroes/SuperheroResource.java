@@ -24,10 +24,10 @@ public class SuperheroResource {
         return Multi.createFrom().iterable(store.values());
     }
 
+    //Thread.sleep blocks the nonblocking endpoint
     @POST
     public Uni<Superhero> create(final Superhero hero) {
         return Uni.createFrom().item(() -> {
-
 //            try {
 //                Thread.sleep(3000);
 //            } catch (final InterruptedException exception) {
