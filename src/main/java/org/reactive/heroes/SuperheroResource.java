@@ -29,6 +29,11 @@ public class SuperheroResource {
     public Response create(@QueryParam("id") final Long id, @QueryParam("name") final String name,
                            final @QueryParam("power") String power) {
         try {
+
+            /*
+            The constructor is called by reflection, the Superhero.class constructor is not used directly,
+            marking it as not needed for the native package
+             */
             final Superhero hero = InstanceCreator.createInstance(Superhero.class);
             hero.setId(id);
             hero.setName(name);

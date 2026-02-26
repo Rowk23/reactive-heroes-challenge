@@ -5,6 +5,7 @@ import io.quarkus.runtime.annotations.RegisterForReflection;
 /**
  * Simple POJO representing a superhero with an id, name, power, and a secret hash.
  */
+//Mark it for native package
 @RegisterForReflection
 public class Superhero {
 
