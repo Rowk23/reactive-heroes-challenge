@@ -1,12 +1,15 @@
 package org.reactive.heroes;
 
+import io.smallrye.common.annotation.Blocking;
 import io.smallrye.mutiny.Multi;
 import io.smallrye.mutiny.Uni;
+import io.smallrye.mutiny.infrastructure.Infrastructure;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Executor;
 
 /**
  * Resource class for managing superheroes. Provides endpoints to create and retrieve superheroes.
@@ -25,6 +28,8 @@ public class SuperheroResource {
     }
 
     //Thread.sleep blocks the nonblocking endpoint
+    //Hashing and storing could still block the endpoint
+    //Using runSubscription will move this to the worker threads
     @POST
     public Uni<Superhero> create(final Superhero hero) {
         return Uni.createFrom().item(() -> {
@@ -38,6 +43,7 @@ public class SuperheroResource {
 
             store.put(hero.getId(), hero);
             return hero;
-        });
+        })
+                .runSubscriptionOn(Infrastructure.getDefaultExecutor());
     }
 }
